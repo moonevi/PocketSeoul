@@ -82,15 +82,16 @@
                       
                       
                        <c:choose>
-							<c:when test="${ empty user }">
+							<c:when test="${result == 0}"> <!-- 세션 x 로그아웃 상태 -->
 								<li class="loginclass"><a href="/seoul/login">로그인</a></li>
 								
 							</c:when>
 							<c:otherwise>
-								<li><a href="/Lush/member/logout.do">로그아웃</a></li>
+							
 								<li><a href="/Lush/mypage/mypage.do">마이페이지</a></li>
+								<li><a href="https://kauth.kakao.com/oauth/logout?client_id=키&logout_redirect_uri=http://localhost:8060/seoul/logout">로그아웃</a></li>
+							
 							</c:otherwise>
-					
 					
 					
 						</c:choose>   
@@ -103,8 +104,8 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="head-search">
-                                            <form role="form">
-                                                <!-- Input Group -->
+                                            <!-- <form role="form">
+                                                Input Group
                                                 <div class="input-group">
                                                     <input type="text" class="form-control"
                                                            placeholder="Type Something"> <span class="input-group-btn">
@@ -112,7 +113,7 @@
                                                                                     class="btn btn-primary">Search
                                                                             </button>
                                                                         </span></div>
-                                            </form>
+                                            </form> -->
                                         </div>
                                     </li>
                                 </ul>
@@ -468,11 +469,11 @@
                                             <tr>
                                                 <th>
                                                     <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" onchange="checkBox(this)" name="check${ arr[status.index] }" id="check${ arr[status.index] }">
+                                                        <input type="checkbox" class="listCheckbox" onchange="checkBox(this)" name="check${ arr[status.index] }" id="check${ arr[status.index] }" value="thr${ arr[status.index - 10] }">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </th>
-                                                <td><a href="#" target="_self" id="formtwo${ arr[status.index] }">${list.title}</a></td>
+                                                <td><a href="${list.url}" target="_self" id="formtwo${ arr[status.index] }">${list.title}</a></td>
                                                 <td>${ list.date }</td>
                                                 <!-- <td>MAC OS</td>
                                                 <td>76</td> -->
@@ -508,17 +509,14 @@
 
 <nav aria-label="Page navigation" class="pagination_section">
     <ul class="pagination">
-        <li>
+       <!--  <li>
             <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
-        </li>
+        </li> -->
         <li><a id="pageone" href="/seoul/">1</a></li>
         <li><a id="pagetwo" href="/seoul/allPage2">2</a></li>
-     <!--   <li><a class="pagethree" href="#">3</a></li>
-        <li><a class="pagefour" href="#">4</a></li>
-         <li><a href="#">5</a></li> -->
-        <li>
+        <!-- <li>
             <a href="#" aria-label="Next" class="active"> <span aria-hidden="true">&raquo;</span> </a>
-        </li>
+        </li> -->
     </ul>
 </nav>
 <!-- navigation -->
@@ -707,17 +705,6 @@
             <div class="row">
                 <div class="footer">
                     <div class="col-sm-3">
-                        <div class="social">
-                            <a class="icons-sm fb-ic"><i class="fa fa-facebook"></i></a>
-                            <!--Twitter-->
-                            <a class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a>
-                            <!--Google +-->
-                            <a class="icons-sm inst-ic"><i class="fa fa-instagram"> </i></a>
-                            <!--Linkedin-->
-                            <a class="icons-sm tmb-ic"><i class="fa fa-tumblr"> </i></a>
-                            <!--Pinterest-->
-                            <a class="icons-sm rss-ic"><i class="fa fa-rss"> </i></a>
-                        </div>
                     </div>
                     <div class="col-sm-6">
                         <p>&copy; Copyright 2016-Tech News . Design by: <a href="https://uicookies.com">uiCookies</a> </p>
@@ -744,49 +731,11 @@
     <div>
         <div>
             <ul id="menu">
-                <li class="active"><a href="blog.html">News</a></li>
-                <li><a href="category.html">Mobile</a></li>
-                <li><a href="blog.html">Tablet</a></li>
-                <li><a href="category.html">Gadgets</a></li>
-                <li><a href="blog.html">Camera</a></li>
-                <li><a href="category.html">Design</a></li>
-                <li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">More
-                    <span><i class="fa fa-angle-down"></i></span></a>
+               
                     <ul class="dropdown-menu">
                         <li>
                             <div class="m-menu-content">
-                                <ul class="col-sm-3">
-                                    <li class="dropdown-header">Widget Haeder</li>
-                                    <li><a href="#">Awesome Features</a></li>
-                                    <li><a href="#">Clean Interface</a></li>
-                                    <li><a href="#">Available Possibilities</a></li>
-                                    <li><a href="#">Responsive Design</a></li>
-                                    <li><a href="#">Pixel Perfect Graphics</a></li>
-                                </ul>
-                                <ul class="col-sm-3">
-                                    <li class="dropdown-header">Widget Haeder</li>
-                                    <li><a href="#">Awesome Features</a></li>
-                                    <li><a href="#">Clean Interface</a></li>
-                                    <li><a href="#">Available Possibilities</a></li>
-                                    <li><a href="#">Responsive Design</a></li>
-                                    <li><a href="#">Pixel Perfect Graphics</a></li>
-                                </ul>
-                                <ul class="col-sm-3">
-                                    <li class="dropdown-header">Widget Haeder</li>
-                                    <li><a href="#">Awesome Features</a></li>
-                                    <li><a href="#">Clean Interface</a></li>
-                                    <li><a href="#">Available Possibilities</a></li>
-                                    <li><a href="#">Responsive Design</a></li>
-                                    <li><a href="#">Pixel Perfect Graphics</a></li>
-                                </ul>
-                                <ul class="col-sm-3">
-                                    <li class="dropdown-header">Widget Haeder</li>
-                                    <li><a href="#">Awesome Features</a></li>
-                                    <li><a href="#">Clean Interface</a></li>
-                                    <li><a href="#">Available Possibilities</a></li>
-                                    <li><a href="#">Responsive Design</a></li>
-                                    <li><a href="#">Pixel Perfect Graphics</a></li>
-                                </ul>
+                               
                             </div>
                         </li>
                     </ul>
@@ -849,20 +798,18 @@
 </script>
 
 
-
-
 <script>
 
-function checkBox(checked){
-	
-	
-	alert($("input[type=checkbox]:checked").val()); // one1  왜 on 이뜨노 
-	 var id = $("input[type=checkbox]:checked").val();
-	 var site = id.substr(0,3);
-	 var num = id.substr(3,1);
-	 alert(site);
-	 alert(num);
-	
+$(".listCheckbox").change(function() {   
+	var result = '<c:out value="${result}"/>';
+	if(result == 0){
+		alert("북마크 기능을 사용하려면 로그인해주세요!");
+		return false;
+	}
+    var id = $(this).val();   
+    var site = id.substr(0,3);
+	var num = id.substr(3,1);
+    
 	 $.ajax({
 			url : "bookmark",
 			type : "get",
@@ -874,9 +821,9 @@ function checkBox(checked){
 			},
 			
 			error : function(){ alert("서버요청실패"); }
-		}) /* ajax */
-	
-}
+		}) 
+});
+
 
 </script>
 

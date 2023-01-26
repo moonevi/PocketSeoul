@@ -86,7 +86,7 @@
 								
 							</c:when>
 							<c:otherwise>
-								<li><a href="/Lush/member/logout.do">로그아웃</a></li>
+								<li><a href="https://kauth.kakao.com/oauth/logout?client_id=키&logout_redirect_uri=http://localhost:8060/seoul/logout">로그아웃</a></li>
 								<li><a href="/Lush/mypage/mypage.do">마이페이지</a></li>
 							</c:otherwise>
 					
@@ -503,14 +503,11 @@
 
 <nav aria-label="Page navigation" class="pagination_section">
     <ul class="pagination">
-        <li>
+       <!--  <li>
             <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
-        </li>
+        </li> -->
           <li><a id="pageone" href="/seoul/">1</a></li>
         <li><a id="pagetwo" href="/seoul/allPage2">2</a></li>
-     <!--   <li><a class="pagethree" href="#">3</a></li>
-        <li><a class="pagefour" href="#">4</a></li>
-         <li><a href="#">5</a></li> -->
       <!--   <li>
             <a href="#" aria-label="Next" class="active"> <span aria-hidden="true">&raquo;</span> </a>
         </li> -->
@@ -849,7 +846,7 @@
  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
  <script>
     if (!Kakao.isInitialized()) {
-        window.Kakao.init('b2a4257980333a311008f0a68f50e442');
+        window.Kakao.init('키');
     };
    
 </script>
@@ -874,167 +871,14 @@
 
 
 <script>
-/* 페이징 1  */
-function callFunction1() {
 
-	 
-	
-		$.ajax({
-			url : "allpage1",
-			type : "get",
-			dataType : 'json',
-			success : makeView,
-			
-			error : function(){ alert("서버요청실패"); }
-		}) /* ajax */
-		 $("#title1").text("청년 몽땅 정보통");	
-		 $("#entity2").show();
-		 $("#entity3").show();
-		 var listHtml = "";
-		function makeView(unitOne){
-			/*  alert(unitOne); */
-			 
-			
-			 var listHtml2 = "";
-			 var listHtml3 = "";
-			 for(var key in unitOne) {
-				
-				 if( key < 5){
-					 listHtml += "<tr>";
-					 listHtml += "<td>";
-					 listHtml += "<label class='customcheckbox'>";
-					 listHtml += "<input type='checkbox' class='listCheckbox'>";
-					 listHtml += "<span class='checkmark'></span>";
-					 listHtml += "</label>";
-					 listHtml += "</td>"; 
-					listHtml += "<td><a href="+unitOne[key].url+"target='_self'>"+unitOne[key].title+"</a></td>";
-					listHtml += "<td>날짜</td>";
-					listHtml += "</tr>";
-					
-				//	alert(unitOne[key].title);
-					 
-				  console.log("key: ", key)
-				  console.log("value: ", unitOne[key].title)
-				  console.log("----------------")
-				  
-				 } else if( key >= 5 && key<10){
-					 listHtml2 += "<tr>";
-					 listHtml2 += "<td>";
-					 listHtml2 += "<label class='customcheckbox'>";
-					 listHtml2 += "<input type='checkbox' class='listCheckbox'>";
-					 listHtml2 += "<span class='checkmark'></span>";
-					 listHtml2 += "</label>";
-					 listHtml2 += "</td>";
-					listHtml2 += "<td><a href="+unitOne[key].url+"target='_self'>"+unitOne[key].title+"</a></td>";
-					listHtml2 += "<td>날짜</td>";
-					listHtml2 += "</tr>";
-					 
-				
-					 
-					 console.log("2key: ", key)
-					  console.log("2value: ", unitOne[key].title)
-					  console.log("----------------")
-				 }else if(key >= 10 && key < 15){
-					 listHtml3 += "<tr>";
-					 listHtml3 += "<td>";
-					 listHtml3 += "<label class='customcheckbox'>";
-					 listHtml3 += "<input type='checkbox' class='listCheckbox'>";
-					 listHtml3 += "<span class='checkmark'></span>";
-					 listHtml3 += "</label>";
-					 listHtml3 += "</td>";
-					listHtml3 += "<td><a href="+unitOne[key].url+"target='_self'>"+unitOne[key].title+"</a></td>";
-					listHtml3 += "<td>날짜</td>";
-					listHtml3 += "</tr>";
-					 
-					$("#bookmark3").html(listHtml3);
-				 }
-				
-			 }// for
-		 $("#bookmark1").html(listHtml);
-			$("#bookmark2").html(listHtml2);
-			 
-		 }/* makeView(  */
-
-	
-}
-
-</script>
-
-
-<script>
-/* 2번 페이지 */ 
-function callFunction2() {
-	
-
-	 
-	 $.ajax({
-			url : "allpage2",
-			type : "get",
-			dataType : 'json',
-			success : makeView2,
-			
-			error : function(){ alert("서버요청실패"); }
-		}) /* ajax */
-	
-		 var listHtml4 = "";
-		 var listHtml5 = "";
-		function makeView2(unitTwo){
-			  alert(unitTwo); 
-			 
-			
-			 for(var key in unitTwo) {
-				
-				 if( key < 5){
-					 listHtml4 += "<tr>";
-					 listHtml4 += "<td>";
-					 listHtml4 += "<label class='customcheckbox'>";
-					 listHtml4 += "<input type='checkbox' class='listCheckbox'>";
-					 listHtml4 += "<span class='checkmark'></span>";
-					 listHtml4 += "</label>";
-					 listHtml4 += "</td>"; 
-					listHtml4 += "<td><a href="+unitTwo[key].url+"target='_self'>[AJAX 처리]"+unitTwo[key].title+"</a></td>";
-					listHtml4 += "<td>날짜</td>";
-					listHtml4 += "</tr>";
-					
-				//	alert(unitOne[key].title);
-					 
-				  console.log("key: ", key)
-				  console.log("value: ", unitTwo[key].title)
-				  console.log("----------------")
-				  
-				 } 
-				
-			 }// for
-			 $("#title1").text("LH");
-			  $("#entity2").hide();
-			  $("#entity3").hide();
-			 $("#bookmark1").html(listHtml4);
-			
-			 
-		 }/* makeView(  */
-
-}
-
-</script>
-
-<script>
-//하나의 jsp 파일 내에 작성된 소스라 하더라도 스크립틀릿이나 jstl, el 등은 서버에서 실행되고 
-//자바스크립트는 브라우저에서 실행되기 때문에 두 언어 간에 변수를 직접 주고 받을 수는 없습니다.
-// titleformone1 -> title 값 formone 일때, title + formone + 1 
-// formone -> 0 [1] 2 3 4 ajax로 list[1].title 값 가져오기  
-// formtwo -> 5 6 7 8 9 
-//			  0 1 2 3 4 
-//           +5 씩 
-
-// 체크 박스 클릭 -> one [0] -> 0~4 의 0 
-// 굳이 안 불러오고 걍 객체 만들어 저장하면 된다. 
-
-// id = one2 
-// 
 function checkBox(checked){
-	 debugger;
-	 alert($("input[type=checkbox]:checked").val()); // one1 
-	 var id = $("input[type=checkbox]:checked").val();
+	var result = '<c:out value="${result}"/>';
+	if(result == 0){
+		alert("북마크 기능을 사용하려면 로그인해주세요!");
+		return false;
+	}
+	 var id = $(this).val();   
 	 var site = id.substr(0,3);
 	 var num = id.substr(3,1);
 	
@@ -1052,27 +896,7 @@ function checkBox(checked){
 		}) /* ajax */
 	
 }
-/* 변수 = id 값의 value txt? 
-		one + 숫자 따로 변수 저장 
-		one , 1 
-if (id = one){
-	
-	ajax 
-	/ url 
-	/ 1 서버로 보냄 
-	->컨트롤러 단 : 
-		list [ 1(n) ] -> 값 꺼내서 새로운 객체를 만듦
-		이걸 db에 insert 해 주기 
-	
-}else if ( id = two ){
-	
-	n + 5 해서 
-	ajax 
-	/ url 
-	/ 서버로 
-	-> list [ n ] ... 반복 
-}
- */
+
 </script>
 
 
