@@ -49,7 +49,7 @@ public class LoginService {
 	            sb.append("grant_type=authorization_code");
 
 	            //1번 파라미터 client_id입니다. ***자신의 앱 REST API KEY로 변경해주세요***
-	            sb.append("&client_id=63");
+	            sb.append("&client_id=6b5cee6e3a93d0c1da8733dc02316363");
 
 	            //2번 파라미터 redirect_uri입니다. ***자신의 redirect uri로 변경해주세요***
 	            sb.append("&redirect_uri=http://localhost:8060/seoul/login/kakao-redirect");
@@ -169,23 +169,16 @@ public class LoginService {
 	    public int findUser(Long id, String email, String nickname) {
 	    	
 	    	int result = 0;
-	    	// 받아온 id 가 있는지 확인 
-	    	System.out.println("finuser1");
-	    	System.out.println(id);
-	    	
-	    
+    
 	    	int user = loginmapper.CheckById(id);
-	    
-	    	System.out.println("finuser2");
-	    	System.out.println(user);
+	
 	    	if( user == 0) { // 아이디가 존재하지 않으면 회원가입 o  
-	    		System.out.println("finuser3");
 	    		result = loginmapper.SignUp(id, email, nickname); // 성공하면 1
 	    		
-	    	}else {System.out.println("finuser4");
+	    	}else {
 	    		result = 0;
-	    	
 	    	}
+	    	
 	    	return result;
 	    }
 }

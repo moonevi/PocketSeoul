@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.ParseConversionEvent;
 
 import org.jsoup.nodes.Element;
@@ -21,12 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pocket.seoul.service.ListService;
-import com.pocket.seoul.service.crawler;
-import com.pocket.seoul.service.crawler.*;
 import com.pocket.seoul.service.crawlerex;
 import com.pocket.member.entity.Bookmark;
 import com.pocket.member.entity.Mark;
-import com.pocket.member.entity.Site;
 import com.pocket.member.mapper.LoginMapper;
 import com.pocket.member.service.LoginService;
 import com.pocket.member.service.MainService;
@@ -40,21 +38,32 @@ import com.pocket.seoul.entity.youthSeoul;
 public class IndexController {
 	
 	@Autowired
-	MainService mainservice;
-	LoginMapper loginmapper;
+	private ListService listservice;
 	
-	
-	
+	public IndexController(ListService listservice) {
+		this.listservice = listservice;
+	}
+
 	@RequestMapping(value = {"/"})
-	public String mainList(Model model) throws IOException{
+	public String mainList(Model model, HttpServletRequest reqeust) throws IOException{
 		
-		ListService listservice = new ListService();
 		List<Mark> list = new ArrayList<>();
 		int arr[];
+		int result = 1;
 		
 		list = listservice.makeList();
 		arr = listservice.makeIndex();
 	
+		HttpSession session = reqeust.getSession(false);
+    	
+		if(session == null) {
+    		result = 0;
+    		
+    	}else {
+    		result = 1;
+    	}
+		
+		model.addAttribute("result", result);
 		model.addAttribute("arr", arr);
 		model.addAttribute("list", list);
 		
@@ -63,15 +72,25 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value = {"/allPage2"})
-	public String allPagetwo(Model model) throws IOException{
+	public String allPagetwo(Model model, HttpServletRequest reqeust) throws IOException{
 		
-		ListService listservice = new ListService();
 		List<Mark> list = new ArrayList<>();
 		int arr[];
+		int result = 1;
 		
 		list = listservice.makeList();
 		arr = listservice.makeIndex();
 	
+		HttpSession session = reqeust.getSession(false);
+    	
+		if(session == null) {
+    		result = 0;
+    		
+    	}else {
+    		result = 1;
+    	}
+		
+		model.addAttribute("result", result);
 		model.addAttribute("arr", arr);
 		model.addAttribute("list", list);
 		

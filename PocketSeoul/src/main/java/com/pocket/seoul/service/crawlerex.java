@@ -13,8 +13,7 @@ import com.pocket.member.entity.Mark;
 
 
 public class crawlerex {
-
-	  
+ 
 		public List<Mark> getyth() throws IOException{
 		
 			List<Mark> list = new ArrayList<>();
@@ -114,7 +113,6 @@ public class crawlerex {
 				for(int i = 0 ; i < 9; i+=2 ) {
 					 Element datas = data.get(i);
 			         String date = datas.text();
-			         System.out.println("date :" + date);
 			         dateArr.add(date);
 			        
 				}
@@ -122,8 +120,6 @@ public class crawlerex {
 				
 				for (int i = 0; i < 5; i++) {
 					 Element title = titles.get(i);
-					 Element datas = data.get(i);
-					
 					 
 					 String titleStr = title.text();
 					 String urlStr = ("https://www.lh.or.kr/bbs/list.do?sCode=user&mId=633&mPid=26&bbsSeq=&nttSeq=");

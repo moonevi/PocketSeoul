@@ -32,9 +32,9 @@
 
     <!-- Owl carousel -->
   <!--   <link href="assets/css/owl.carousel.css" rel="stylesheet"> -->
-    <link href="${path}/resources/css/owl.carousel.css"" rel="stylesheet"/> 
+    <link href="${path}/resources/css/owl.carousel.css" rel="stylesheet"/> 
 <!--     <link href="assets/css/owl.theme.default.min.css" rel="stylesheet"> -->
-    <link href="${path}/resources/css/owl.theme.default.min.css"" rel="stylesheet"/> 
+    <link href="${path}/resources/css/owl.theme.default.min.css" rel="stylesheet"/> 
     <!-- Theme Style -->
     <link href="${path}/resources/css/stylemain.css" rel="stylesheet"/> 
 
@@ -76,34 +76,32 @@
                 <div class="col-md-4">
                     <div class="right_section">
                         <ul class="nav navbar-nav">
-                         <!--    <li><a href="/seoul/login.do">Login</a></li>
-                            <li><a href="#">Register</a></li> -->
-                      
-                      
-                       <c:choose>
-							<c:when test="${ empty user }">
+                        
+						<c:choose>
+							<c:when test="${result == 0}"> <!-- 세션 x 로그아웃 상태 -->
 								<li class="loginclass"><a href="/seoul/login">로그인</a></li>
 								
 							</c:when>
 							<c:otherwise>
-								<li><a href="https://kauth.kakao.com/oauth/logout?client_id=키&logout_redirect_uri=http://localhost:8060/seoul/logout">로그아웃</a></li>
-								<li><a href="/Lush/mypage/mypage.do">마이페이지</a></li>
+							
+								<li><a href="/seoul/mypage">마이페이지</a></li>
+								<li><a href="https://kauth.kakao.com/oauth/logout?client_id=b2a40e442&logout_redirect_uri=http://localhost:8060/seoul/logout">로그아웃</a></li>
+							
 							</c:otherwise>
 					
 					
-					
-						</c:choose>   
+						</c:choose>  
                         </ul>
                         <!-- Language Section -->
 
                         <ul class="nav-cta hidden-xs">
-                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i
+                           <!--  <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i
                                     class="fa fa-search"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="head-search">
                                             <form role="form">
-                                                <!-- Input Group -->
+                                                Input Group
                                                 <div class="input-group">
                                                     <input type="text" class="form-control"
                                                            placeholder="Type Something"> <span class="input-group-btn">
@@ -115,7 +113,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>  -->
                         </ul>
                         <!-- Search Section -->
                     </div>
@@ -187,39 +185,24 @@
                                 <span><i class="fa fa-angle-down"></i></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <div class="m-menu-content">
+                                           <div class="m-menu-content">
                                             <ul class="col-sm-3">
                                                 <li class="dropdown-header">전체</li>
-                                                <li><a href="#">청년 몽땅 정보통</a></li>
-                                                <li><a href="#">서울시청</a></li>
-                                                <li><a href="#">청년정책</a></li>
-                                                <!-- <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li> -->
+                                                <li><a href="https://youth.seoul.go.kr/site/main/home">청년 몽땅 정보통</a></li>
+                                                <li><a href="https://www.seoul.go.kr/main/index.jsp">서울시청</a></li>
+                                                <li><a href="https://blog.naver.com/we_are_youth">청년정책</a></li>
+                                                <li><a href="https://www.youthcenter.go.kr/main.do">온라인청년센터</a></li>
                                             </ul>
                                             <ul class="col-sm-3">
                                                 <li class="dropdown-header">주거</li>
-                                                <li><a href="#">LH 한국주택공사</a></li>
-                                                <li><a href="#">SH 서울주택공사</a></li>
-                                              <!--   <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li> -->
+                                                <li><a href="https://www.lh.or.kr/">LH 한국주택공사</a></li>
+                                                <li><a href="https://www.i-sh.co.kr/">SH 서울주택공사</a></li>
                                             </ul>
                                             <ul class="col-sm-3">
                                                 <li class="dropdown-header">문화</li>
-                                                <li><a href="#">서울문화포털</a></li>
-                                               <!--  <li><a href="#">Clean Interface</a></li>
-                                                <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li> -->
+                                                <li><a href="https://culture.seoul.go.kr/culture/main/main.do">서울문화포털</a></li>
                                             </ul>
-                                           <!--  <ul class="col-sm-3">
-                                                <li class="dropdown-header">Widget Haeder</li>
-                                                <li><a href="#">Awesome Features</a></li>
-                                                <li><a href="#">Clean Interface</a></li>
-                                                <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li>
-                                            </ul> -->
+                                       
                                         </div>
                                     </li>
                                 </ul>
@@ -244,7 +227,7 @@
 <div class="col-md-8">
 <div class="entity_wrapper">
     <div class="entity_title">
-        <h1><a href="single.html" target="_self" id="title1">LH 한국주택공사</a>
+        <h1><a href="https://www.lh.or.kr/" target="_self" id="title1">LH 한국주택공사</a>
         </h1>
     </div>
     <!-- entity_title -->
@@ -263,17 +246,11 @@
                                     <table class="table">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>
-                                                    <label class="customcheckbox m-b-20">
-                                                        <input type="checkbox" id="mainCheckbox">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
+                                                
+                                                <th scope="col">북마크</th>
                                                 <th scope="col">제목</th>
                                                 <th scope="col">작성일</th>
-                                               <!--  <th scope="col">Platform(s)</th>
-                                                <th scope="col">Engine version</th> -->
-                                            </tr>
+                                              </tr>
                                         </thead>
                                         <tbody class="customtable" id="bookmark1">
                                   
@@ -281,7 +258,7 @@
                                             <tr>
                                                 <th>
                                                     <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" onchange="checkBox(this)" name="one${ arr[status.index] }" id="one${ arr[status.index] }" value="one${ arr[status.index] }">
+                                                        <input type="checkbox" class="listCheckbox" onchange="checkBox(this)" name="one${ arr[status.index] }" id="one${ arr[status.index] }" value="fou${ status.index }">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </th>
@@ -289,8 +266,7 @@
                                               
     											
                                                 <td>${ list.date }</td>
-                                                <!-- <td>MAC OS</td>
-                                                <td>76</td> -->
+                                               
                                             </tr>
                                             
                                             </c:forEach>
@@ -324,99 +300,7 @@
 
 
 
-<!-- 테스트  -->
 
-<%-- 
-<div class="entity_wrapper" id="entity2">
-    <div class="entity_title">
-        <h1><a href="single.html" target="_self">SH 서울주택공사</a>
-        </h1>
-    </div>
-    <!-- entity_title -->
-        <!-- 표 테스트  -->
-    
-    <div class="container">
-                      
-                                
-                    <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                           <!--  <div class="card-body text-center">
-                                <h5 class="card-title m-b-0">Static Table With Checkboxes</h5>
-                            </div> -->
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox m-b-20">
-                                                        <input type="checkbox" id="mainCheckbox">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <th scope="col">제목</th>
-                                                <th scope="col">작성일</th>
-                                               <!--  <th scope="col">Platform(s)</th>
-                                                <th scope="col">Engine version</th> -->
-                                            </tr>
-                                        </thead>
-                                        <tbody class="customtable" id="bookmark2">
-                                  
-											<c:forEach items="${list}" var="list" varStatus="status" begin="5" end="9" step="1">                                        
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" onchange="checkBox(this)" name="check${ arr[status.index] }" id="check${ arr[status.index] }">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td><a href="#" target="_self" id="formtwo${ arr[status.index] }">${list.title}</a></td>
-                                                <td>${ list.date }</td>
-                                                <!-- <td>MAC OS</td>
-                                                <td>76</td> -->
-                                            </tr>
-                                            </c:forEach>
-                                            
-                                     
-                                        </tbody>
-                                    </table>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-
-                   </div> 
-    
-    
-    <!-- 표 테스트  -->
-    
-
-   
-    <!-- rating -->
-
-  <!--   <div class="entity_social">
-        <a href="#" class="icons-sm sh-ic"><i class="fa fa-share-alt"></i><b>424</b>
-            <span class="share_ic">Shares</span>
-        </a>
-        <a href="#" class="icons-sm fb-ic"><i class="fa fa-facebook"></i></a>
-        Twitter
-        <a href="#" class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a>
-        Google +
-        <a href="#" class="icons-sm inst-ic"><i class="fa fa-google-plus"> </i></a>
-        Linkedin
-        <a href="#" class="icons-sm tmb-ic"><i class="fa fa-ge"> </i></a>
-        Pinterest
-        <a href="#" class="icons-sm rss-ic"><i class="fa fa-rss"> </i></a>
-        <span class="arrow">&raquo;</span>
-    </div> -->
-    <!-- entity_social -->
-
-  <!--   <div class="entity_thumb">
-        <img class="img-responsive" src="assets/img/category_img_top.jpg" alt="feature-top">
-    </div> -->
-    <!-- entity_thumb -->
-
-    
 
 </div>
 <!-- entity_wrapper -->
@@ -424,114 +308,32 @@
 
 <!--  -->
 
-<div class="entity_wrapper" id="entity3">
-    <div class="entity_title">
-        <h1><a href="https://www.youthcenter.go.kr/main.do" target="_self">온라인 청년센터</a>
-        </h1>
-    </div>
-    <!-- entity_title -->
-        <!-- 표 테스트  -->
-    
-    <div class="container">
-                      
-                                
-                    <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                           <!--  <div class="card-body text-center">
-                                <h5 class="card-title m-b-0">Static Table With Checkboxes</h5>
-                            </div> -->
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox m-b-20">
-                                                        <input type="checkbox" id="mainCheckbox">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <th scope="col">제목</th>
-                                                <th scope="col">작성일</th>
-                                               <!--  <th scope="col">Platform(s)</th>
-                                                <th scope="col">Engine version</th> -->
-                                            </tr>
-                                        </thead>
-                                        <tbody class="customtable" id="bookmark3">
-                                  
-										 		<c:forEach items="${list}" var="list" varStatus="status" begin="10" end="14" step="1">                                        
-                                            <tr>
-                                                <th>
-                                                    <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" onchange="checkBox(this)" name="check${ arr[status.index] }" id="check${ arr[status.index] }">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <td><a href="#" target="_self" id="formtwo${ arr[status.index] }">${list.title}</a></td>
-                                                <td>${ list.date }</td>
-                                                <!-- <td>MAC OS</td>
-                                                <td>76</td> -->
-                                            </tr>
-                                            </c:forEach>
-                                            
-                                            
-                                   
-                                        </tbody>
-                                    </table>
-                                </div>
-                        </div>
-                    </div>
-                </div>
 
-                   </div> 
-    
-    
-    <!-- 표 테스트  -->
-    
-
-  
-
-    
-
-</div>
-<!-- entity_wrapper -->
- --%>
 
 
 
-<!-- 페이징 처리  -->
+</div>
+<!-- col-md-8 -->
+<!-- 페이징  -->
 
 <nav aria-label="Page navigation" class="pagination_section">
     <ul class="pagination">
        <!--  <li>
             <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
         </li> -->
-          <li><a id="pageone" href="/seoul/">1</a></li>
+        <li><a id="pageone" href="/seoul/">1</a></li>
         <li><a id="pagetwo" href="/seoul/allPage2">2</a></li>
-      <!--   <li>
+        <!-- <li>
             <a href="#" aria-label="Next" class="active"> <span aria-hidden="true">&raquo;</span> </a>
         </li> -->
     </ul>
 </nav>
-<!-- navigation -->
-</div>
-<!-- col-md-8 -->
-
 
 </div>
 <!-- row -->
-
+<!-- 
 </div>
-<!-- container -->
-
-
-
-
-
-
-
-
-
+container -->
 </section>
 <!-- entity_section -->
 <!-- 
@@ -556,6 +358,7 @@
 </section> -->
 <!-- Subscriber Section -->
 
+<!-- navigation -->
 <section id="footer_section" class="footer_section">
    <!--  <div class="container">
         <hr class="footer-top">
@@ -846,42 +649,29 @@
  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
  <script>
     if (!Kakao.isInitialized()) {
-        window.Kakao.init('키');
+        window.Kakao.init('');
     };
    
 </script>
     
-    
-<script>
- 
-
-    function kakaoLogin() {
-        Kakao.Auth.authorize({ 
-        redirectUri: '/login.do' 
-        }); // 등록한 리다이렉트uri 입력
-    } 
-</script>
-
-
-
-
-
-
+   
 
 
 
 <script>
 
-function checkBox(checked){
+
+$(".listCheckbox").change(function() {   
 	var result = '<c:out value="${result}"/>';
 	if(result == 0){
 		alert("북마크 기능을 사용하려면 로그인해주세요!");
 		return false;
 	}
-	 var id = $(this).val();   
-	 var site = id.substr(0,3);
-	 var num = id.substr(3,1);
-	
+	alert("해당 게시글을 북마크에 추가중입니다.");
+    var id = $(this).val();   
+    var site = id.substr(0,3);
+	var num = id.substr(3,1);
+    
 	 $.ajax({
 			url : "bookmark",
 			type : "get",
@@ -889,15 +679,18 @@ function checkBox(checked){
 					"num" : num },
 			dataType : 'json',
 			success : function(data){
-				alert("데이터 전송 성공!");
+				if( data == 1){
+					alert("북마크가 정상적으로 등록되었습니다.");
+				}else{
+					alert("오류로 인해 북마크가 등록되지 않았습니다.");	
+				}
 			},
 			
-			error : function(){ alert("서버요청실패"); }
-		}) /* ajax */
-	
-}
-
+			error : function(){ alert("오류로 인해 북마크가 등록되지 않았습니다."); }
+		}) 
+});
 </script>
+
 
 
 </body>

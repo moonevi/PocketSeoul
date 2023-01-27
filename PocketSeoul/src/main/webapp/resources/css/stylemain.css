@@ -303,13 +303,10 @@ section {
     padding: 3px 10px 15px;
 }
 
-.right_section .navbar-nav > li:first-child a:after {
-    content: " /";
-    margin-left: 5px;
-}
+
 
 .right_section .navbar-nav > li:last-child {
-    border-bottom: 1px solid #000;
+  /*   border-bottom: 1px solid #000; */
 }
 
 .right_section .navbar-nav > li > a {
@@ -2227,6 +2224,25 @@ th {
         margin: 100px auto;
     }
     
+/* login page  */
+	.containers{
+	  display: flex;
+	  align-items: center; /* 수직 정렬 */
+	  flex-direction: row; /* default: row */
+	  justify-content: center; /* flex direction에 대해서 정렬방식 선택 */
+	}
+	
+	.inners{
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%,-50%);
+	  text-align: center
+	}
 
-
-    
+	#bookmarkh3{
+		font-family: 'NanumSquareNeo-Variable';
+	    font-size: 20px;
+	    line-height: 30px;
+	   
+	}

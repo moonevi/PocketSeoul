@@ -16,17 +16,15 @@ public class ListService {
 	
 	crawlerex cwlex = new crawlerex();
 	
-	// 전체 게시글 list 
+	// 전체 게시글 list, 북마크 리스트
 	public List<Mark> makeList() throws IOException{
 		
 		List<Mark> listYS = cwlex.getyth();
 		List<Mark> listSH = cwlex.getSh();
 		List<Mark> listLh = cwlex.getLh();
 		List<Mark> listYC = cwlex.getYouthCenter();
-		
-		// 배열 NULL 일 경우 예외처리 
-		
-		// 현재 20개 
+
+
 		ArrayList<Mark> list = new ArrayList<>();
 		
 		for(Mark i : listYS) {
@@ -52,7 +50,7 @@ public class ListService {
 
 
 	public int[] makeIndex() {
-		int arr[] = {0, 1, 2 ,3 ,4};
+		int arr[] = new int[100];
 		return arr;
 	}
 	

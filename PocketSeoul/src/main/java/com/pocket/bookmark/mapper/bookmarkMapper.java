@@ -17,9 +17,9 @@ public interface bookmarkMapper {
 	// 현재 사이트 리스트 저장 
 	public int insertList(@Param("title") String title, @Param("date") String date, @Param("url") String url, @Param("userid") Long userid);
 
-	// 북마크 리스트 뿌리기
+	// 북마크 리스트
 	public List<Bookmark> showList(@Param("userid") Long userid);
 	
 	// 북마크 삭제
-	public void deleteList(@Param("num") int num, @Param("userid") Long userid);
+	public int deleteList(@Param("num") int num, @Param("userid") Long userid);
 }

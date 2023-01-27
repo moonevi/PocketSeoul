@@ -9,20 +9,8 @@
 </select>
 
 <insert id="SignUp" parameterType="map">
-INSERT INTO ps_user(user_id ,user_email ,user_nickname) VALUES(#{id},#{email},#{nickname})
+	INSERT INTO ps_user(user_id ,user_email ,user_nickname) VALUES(#{id},#{email},#{nickname})
 </insert>
 
-<select id="Checkmark" parameterType="Long" resultType="arraylist">
-	SELECT ps_site.site_id
-  	FROM ps_bmark 
-	 INNER JOIN ps_site 
-    ON ps_bmark.site_id = ps_site.site_id
-	 WHERE user_id = #{id}
-</select>
 
-<select id="makeMark" parameterType="String" resultType="com.pocket.member.entity.Site">
-SELECT *
-FROM ps_site
-where site_title = #{title}'
-</select>
 </mapper>

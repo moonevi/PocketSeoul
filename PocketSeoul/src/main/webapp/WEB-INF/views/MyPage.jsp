@@ -75,28 +75,17 @@
                 <div class="col-md-4">
                     <div class="right_section">
                         <ul class="nav navbar-nav">                     
-                 
-                       <c:choose>
-							<c:when test="${ empty user }">
-								<li><a href="/seoul/login">로그인</a></li>
-								
-							</c:when>
-							<c:otherwise>
-								<li><a href="/Lush/member/logout.do">로그아웃</a></li>
-							</c:otherwise>
-						</c:choose>
-                       
-                      
-                       
+                 			<li><a href="https://kauth.kakao.com/oauth/logout?client_id=6b5c363&logout_redirect_uri=http://localhost:8060/seoul/logout">로그아웃</a></li>
+						
                         </ul>
                         <!-- Language Section -->
 
                         <ul class="nav-cta hidden-xs">
-                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i
+                            <!--     <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i
                                     class="fa fa-search"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <!-- <div class="head-search">
+                                    <div class="head-search">
                                             <form role="form">
                                                 Input Group
                                                 <div class="input-group">
@@ -184,36 +173,21 @@
                                         <div class="m-menu-content">
                                             <ul class="col-sm-3">
                                                 <li class="dropdown-header">전체</li>
-                                                <li><a href="#">청년 몽땅 정보통</a></li>
-                                                <li><a href="#">서울시청</a></li>
-                                                <li><a href="#">청년정책</a></li>
-                                                <!-- <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li> -->
+                                                <li><a href="https://youth.seoul.go.kr/site/main/home">청년 몽땅 정보통</a></li>
+                                                <li><a href="https://www.seoul.go.kr/main/index.jsp">서울시청</a></li>
+                                                <li><a href="https://blog.naver.com/we_are_youth">청년정책</a></li>
+                                                <li><a href="https://www.youthcenter.go.kr/main.do">온라인청년센터</a></li>
                                             </ul>
                                             <ul class="col-sm-3">
                                                 <li class="dropdown-header">주거</li>
-                                                <li><a href="#">LH 한국주택공사</a></li>
-                                                <li><a href="#">SH 서울주택공사</a></li>
-                                              <!--   <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li> -->
+                                                <li><a href="https://www.lh.or.kr/">LH 한국주택공사</a></li>
+                                                <li><a href="https://www.i-sh.co.kr/">SH 서울주택공사</a></li>
                                             </ul>
                                             <ul class="col-sm-3">
                                                 <li class="dropdown-header">문화</li>
-                                                <li><a href="#">서울문화포털</a></li>
-                                               <!--  <li><a href="#">Clean Interface</a></li>
-                                                <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li> -->
+                                                <li><a href="https://culture.seoul.go.kr/culture/main/main.do">서울문화포털</a></li>
                                             </ul>
-                                           <!--  <ul class="col-sm-3">
-                                                <li class="dropdown-header">Widget Haeder</li>
-                                                <li><a href="#">Awesome Features</a></li>
-                                                <li><a href="#">Clean Interface</a></li>
-                                                <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li>
-                                            </ul> -->
+                                       
                                         </div>
                                     </li>
                                 </ul>
@@ -235,13 +209,8 @@
 <section id="entity_section" class="entity_section">
 <div class="container">
 
-<h1> mypage 입니다 [ ${user.nickname} ] n님 </h1>
-
 </div>
 <!-- container -->
-
-
-<!--   -->
 
 
 
@@ -252,11 +221,10 @@
 <div class="col-md-8">
 <div class="entity_wrapper">
     <div class="entity_title">
-        <h1><a href="single.html" target="_self">북마크 목록</a>
+        <h1><a href="#" target="_self">나의 북마크 목록</a>
         </h1>
     </div>
     <!-- entity_title -->
-        <!-- 표 테스트  -->
     
     <div class="container">
                       
@@ -271,17 +239,10 @@
                                     <table class="table">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>
-                                                    <label class="customcheckbox m-b-20">
-                                                        <input type="checkbox" id="mainCheckbox" >
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </th>
+                                                <th scope="col">북마크</th>
                                                 <th scope="col">제목</th>
                                                 <th scope="col">작성일</th>
-                                               <!--  <th scope="col">Platform(s)</th>
-                                                <th scope="col">Engine version</th> -->
-                                            </tr>
+											</tr>
                                         </thead>
                                         <tbody class="customtable">
                                   
@@ -289,20 +250,15 @@
                                             <tr>
                                                 <th>
                                                     <label class="customcheckbox">
-                                                        <input type="checkbox" class="listCheckbox" checked="checked" value="${ arr[status.index] }">
+                                                        <input type="checkbox" class="listCheckbox" checked="checked" value="${ status.index }" id="form${status.index }">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </th>
-                                                <td><a href="#" target="_self">${list.LIST_TITLE}</a></td>
-                                                <td>Chrome OS</td>
-                                                <!-- <td>MAC OS</td>
-                                                <td>76</td> -->
-                                            </tr>
-                                            
-                                            </c:forEach> 
-                                            
-                                       
-                                        </tbody>
+                                                <td><a href="${list.LIST_URL}"  target="_self">${list.LIST_TITLE}</a></td>
+                                                <td>${ list.LIST_DATE }</td>
+                                               </tr>
+                                       </c:forEach> 
+                                       </tbody>
                                     </table>
                                 </div>
                         </div>
@@ -530,16 +486,6 @@
 
 </body>
 
-<script>
-
-
-let list2 = [];
-<c:forEach items="${list}" var="list" varStatus="status">
-list2.push("${list.LIST_TITLE}");
-</c:forEach>
-
-</script>
-
 
 
 <script>
@@ -547,10 +493,9 @@ list2.push("${list.LIST_TITLE}");
 
 $(".listCheckbox").change(function() {   
 	// 삭제
-    alert(list2);   
-  //  var id = $("input[type=checkbox]:not(:checked)").val();
+    alert("북마크를 삭제 중입니다.");   
     var index = $(this).val();   
-    alert(index); // 0 1 2 ... -> 이걸 북마크 DB의 INDEX[I] 번째 삭제 
+ 
     
     $.ajax({
 		url : "deletemark",
@@ -558,10 +503,15 @@ $(".listCheckbox").change(function() {
 		data : {"index" : index },
 		dataType : 'json',
 		success : function(data){
-			alert("데이터 전송 성공!");
+			if (data == 1){
+				alert("북마크가 삭제되었습니다!");
+				location.href="/seoul/mypage";
+			}else{
+				alert("북마크가 정상적으로 삭제되지 않았습니다.");
+			}
 		},
 		
-		error : function(){ alert("서버요청실패"); }
+		error : function(){ alert("북마크가 정상적으로 삭제되지 않았습니다."); }
 	}) /* ajax */
     
 });

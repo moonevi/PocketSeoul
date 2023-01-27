@@ -11,69 +11,78 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pocket.bookmark.mapper.bookmarkMapper;
+import com.pocket.bookmark.service.BookmarkService;
 import com.pocket.member.entity.Mark;
+import com.pocket.member.service.MemberService;
 import com.pocket.seoul.service.ListService;
 
 @Controller
 public class bookmarkController {
-	// 
+		
+	private bookmarkMapper bookmark;
+	private ListService listservice;
+	private BookmarkService bookmarkservice;
+	
 	@Autowired
-	bookmarkMapper bookmark;
+	public bookmarkController(ListService listservice, bookmarkMapper bookmark, BookmarkService bookmarkservice) {
+		this.bookmark = bookmark;
+		this.listservice = listservice;
+		this.bookmarkservice = bookmarkservice;
+	}
+	
+	// 북마크 생성
+	@ResponseBody
 	@RequestMapping("/bookmark")
-	public void makeMark(@RequestParam("site") String site , @RequestParam("num") String num, HttpServletRequest reqeust) throws IOException {
-		System.out.println(site); // one
-		System.out.println(num); // 1 
+	public int makeMark(@RequestParam("site") String site , @RequestParam("num") String num, HttpServletRequest request) throws IOException {
 		
-		// one1-> one => list[1]
-		// two1 -> two => 5~9 list[5+1] 
-		
-		//
-		ListService listservice = new ListService();
+		int number = Integer.parseInt(num);
+
 		List<Mark> list = new ArrayList<>();
 		
 		list = listservice.makeList();
-		int number = Integer.parseInt(num);
-		// System.out.println(list.get(number)); // title date url 나옴
 		
-		// 이걸 북마크에 insert 
-		
-		HttpSession session = reqeust.getSession();
+		// 접속 중인 userid 불러오기
+		HttpSession session = request.getSession();
 		Long userid = (Long) session.getAttribute("userid");
-		// title 비교해서 이미 있는지 아닌지 비교 
+		
 
-		if( site == "two") {
+		if( site.equals("two") ) {
 			number += 5;
-		}else if( site == "three") {
+		}else if( site.equals("thr") ) {
 			number += 10;
-		}else if( site == "four") {
+		}else if( site.equals("fou") ) {
 			number += 15;
 		}
 		
-		String title = list.get(number).getTitle();
-		String date = list.get(number).getDate();
-		String url = list.get(number).getUrl();
+
+		int result = bookmarkservice.makeBmark(list, number, userid);
 		
-		bookmark.insertList(title, date, url, userid);
+		return result;
 		
 		
 	}
 	
-	@RequestMapping(value = {"/login/deletemark"})
-	public void deleteMark(@RequestParam("index") String index,  HttpServletRequest reqeust) {
-		System.out.println("deletet");
-		System.out.println(index);
+	// 북마크 삭제
+	@ResponseBody
+	@RequestMapping(value = {"/deletemark"})
+	public int deleteMark(@RequestParam("index") String index,  HttpServletRequest reqeust) {
+	
+		int number = Integer.parseInt(index);
+		int num = number + 1;
 		
 		HttpSession session = reqeust.getSession();
 		Long userid = (Long) session.getAttribute("userid");
-		// userid =    조건이랑 추가 
-		int num = Integer.parseInt(index) +1;
-		// 1을 받아와서 해당 행 삭제 
-		bookmark.deleteList(num, userid);
+		
+		// 해당 북마크 삭제
+		int result = bookmark.deleteList(num, userid);
+
+		return result;
 	}
 }

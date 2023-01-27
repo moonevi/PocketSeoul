@@ -1,88 +1,75 @@
 package com.pocket.member.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pocket.bookmark.entity.Bookmark;
 import com.pocket.bookmark.mapper.bookmarkMapper;
 import com.pocket.member.entity.KakaoToken;
-import com.pocket.member.entity.Member;
 import com.pocket.member.entity.User;
 import com.pocket.member.service.KakaoService;
 import com.pocket.member.service.LoginService;
 import com.pocket.member.service.MemberService;
-import com.pocket.seoul.entity.Unit;
 import com.pocket.seoul.service.ListService;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
-public class MemberController {//?
-	 private KakaoService kakaoService;
-	 private final LoginService loginService;
-	 MemberService memservice = new MemberService();
+public class MemberController {
+	
 	 @Autowired
-	 bookmarkMapper bookmapper;
-	 
-	 public MemberController(LoginService loginService) {
+	 private KakaoService kakaoService;
+	 private MemberService memservice;
+	 private bookmarkMapper bookmapper;
+	 private LoginService loginService;
+	
+	
+	 public MemberController(LoginService loginService, bookmarkMapper bookmapper, MemberService memservice) {
 	        this.loginService = loginService;
+	        this.bookmapper = bookmapper;
+	        this.memservice = memservice;
 	    }
 
-	//login 페이지 mapping
+	 	//login 페이지 mapping
 	    @RequestMapping("/login")
 	    public String loginPage(){
-	    	System.out.println("login");
+	    	
 	        return "LoginMain";
 	    }
 	    
 	    //redirect 경로 mapping
 	    @RequestMapping("/login/kakao-redirect")
-	    public String kakaoLogin(@RequestParam(value = "code",required = false) String code, Model model, HttpServletRequest reqeust){
-	    	ListService listservice = new ListService();
+	    public String kakaoLogin(@RequestParam(value = "code",required = false) String code, Model model, HttpServletRequest request){
 	    	
 	    	if(code!=null){
 	            System.out.println("code = " + code);
 
-	             //추가됨: 카카오 토큰 요청
+	            //추가됨: 카카오 토큰 요청
 	            KakaoToken kakaoToken = loginService.requestToken(code);
 	            	
 	         log.info("kakoToken = {}", kakaoToken);
 	         
-	         //추가됨: 유저정보 요청
+	         	//추가됨: 유저정보 요청
 	            User user = loginService.requestUser(kakaoToken.getAccess_token());
 	            log.info("user = {}",user);
 	            
-	            System.out.println("email " + user.getEmail());
-	            System.out.println("name " + user.getNickname());
-	            System.out.println("id " + user.getId());
-	         
-	            //user id가 db상 id에 없다면 -> db 에 인서트 
-	            // 위 객체로 user 만들기 
-	            int result = loginService.findUser(user.getId(), user.getEmail(), user.getNickname());
+	            //userid가 DB에 없으면 회원가입
+	            loginService.findUser(user.getId(), user.getEmail(), user.getNickname());
 	   
-	            model.addAttribute("user", user);
-	            
 	            Long id = user.getId();
-		        // 세션 추가 
-		       memservice.session(reqeust, id);
-		        List<Bookmark> list = bookmapper.showList(id);
-		        System.out.println(list);
-		        model.addAttribute("list", list);
+	            System.out.println(id);
 		        
-		        int arr[];
-		        arr = listservice.makeIndex();
-		        model.addAttribute("arr", arr);
+		        memservice.session(request, id);
+				
+		        return "redirect:/mypage"; 
+	
 	        }
 	        
 	     
@@ -90,4 +77,36 @@ public class MemberController {//?
 	        return "MyPage"; //만들어둔 응답받을 View 페이지 redirectPage.html 리턴
 	    }
 	 
+	    
+	    @RequestMapping("/logout")
+	    public String logput(HttpServletRequest reqeust){
+	    	
+	    	HttpSession session = reqeust.getSession();
+	    	session.invalidate();
+	    	
+	        return "redirect:/";
+	    }
+	    
+	    
+	    @RequestMapping("/mypage")
+	    public String mypage(HttpServletRequest request, Model model){
+	    
+	    	HttpSession session = request.getSession(false);	
+	    	
+			if(session == null) {
+				
+				return "LoginMain";
+				
+	    	}else { // 로그인 중
+	    		
+	    		Long userid = (Long) session.getAttribute("userid");
+	    		List<Bookmark> list = bookmapper.showList(userid);
+		        model.addAttribute("list", list);    
+		       
+	    	}
+	    	
+	    	
+	        return "MyPage";
+	    }
+	    
 	}
