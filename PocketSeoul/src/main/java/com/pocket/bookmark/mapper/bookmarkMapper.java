@@ -22,4 +22,7 @@ public interface bookmarkMapper {
 	
 	// 북마크 삭제
 	public int deleteList(@Param("num") int num, @Param("userid") Long userid);
+	
+	// 북마크 나에게 보내기
+	public Bookmark sendBookmark(@Param("num") int numer, @Param("userid") Long userid);
 }

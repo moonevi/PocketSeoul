@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pocket.bookmark.entity.Bookmark;
 import com.pocket.bookmark.mapper.bookmarkMapper;
 import com.pocket.bookmark.service.BookmarkService;
 import com.pocket.member.entity.Mark;
+import com.pocket.member.service.KakaoService;
 import com.pocket.member.service.MemberService;
 import com.pocket.seoul.service.ListService;
 
@@ -29,12 +31,14 @@ public class bookmarkController {
 	private bookmarkMapper bookmark;
 	private ListService listservice;
 	private BookmarkService bookmarkservice;
+	private KakaoService kakaoService;
 	
 	@Autowired
-	public bookmarkController(ListService listservice, bookmarkMapper bookmark, BookmarkService bookmarkservice) {
+	public bookmarkController(ListService listservice, bookmarkMapper bookmark, BookmarkService bookmarkservice, KakaoService kakaoService) {
 		this.bookmark = bookmark;
 		this.listservice = listservice;
 		this.bookmarkservice = bookmarkservice;
+		this.kakaoService = kakaoService;
 	}
 	
 	// 북마크 생성
@@ -85,4 +89,24 @@ public class bookmarkController {
 
 		return result;
 	}
+	
+	// 북마크 나에게 보내기
+	@ResponseBody
+    @RequestMapping("/message")
+    public int message(HttpServletRequest request, @RequestParam("index") String index) {
+    	
+    	HttpSession session = request.getSession(false);
+    	Long userid = (Long) session.getAttribute("userid");
+    	String access_token = (String) session.getAttribute("access_token");
+    	
+    	int number = Integer.parseInt(index);
+		int num = number + 1;
+		
+		Bookmark bookmark = bookmarkservice.sendBmark(num, userid);
+		    	
+    	int result = kakaoService.isSendMessage(access_token, bookmark);
+    	
+    	return result;
+		
+    }
 }

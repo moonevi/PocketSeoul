@@ -8,6 +8,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +76,7 @@
                 <div class="col-md-4">
                     <div class="right_section">
                         <ul class="nav navbar-nav">                     
-                 			<li><a href="https://kauth.kakao.com/oauth/logout?client_id=6b5c363&logout_redirect_uri=http://localhost:8060/seoul/logout">로그아웃</a></li>
+                 			<li><a href="https://kauth.kakao.com/oauth/logout?client_id=6b5cee6e3a93d0c1da8733dc02316363&logout_redirect_uri=http://localhost:8060/seoul/logout">로그아웃</a></li>
 						
                         </ul>
                         <!-- Language Section -->
@@ -242,6 +243,7 @@
                                                 <th scope="col">북마크</th>
                                                 <th scope="col">제목</th>
                                                 <th scope="col">작성일</th>
+                                                <th scope="col">나에게 전송</th>
 											</tr>
                                         </thead>
                                         <tbody class="customtable">
@@ -256,6 +258,13 @@
                                                 </th>
                                                 <td><a href="${list.LIST_URL}"  target="_self">${list.LIST_TITLE}</a></td>
                                                 <td>${ list.LIST_DATE }</td>
+                                                 <td>
+                                                 <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox1"  value="${ status.index }" id="send{status.index }">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                 
+                                                 </td>
                                                </tr>
                                        </c:forEach> 
                                        </tbody>
@@ -270,9 +279,28 @@
     
     <!-- 표 테스트  -->
     
+    <!--  -->
     
+ 
+   
+    <!--  -->
 
 </div>
+
+ <script>
+    if (!Kakao.isInitialized()) {
+        window.Kakao.init('b2a4257980333a311008f0a68f50e442');
+    };
+   
+</script>
+
+
+
+
+
+
+
+
 
 <!-- navigation -->
 </div>
@@ -486,7 +514,36 @@
 
 </body>
 
+<script>
 
+
+
+$(".listCheckbox1").change(function() {   
+	// 삭제
+    alert("나에게 메시지 전송 중입니다.");   
+    var index = $(this).val();   
+ 
+    
+    $.ajax({
+		url : "message",
+		type : "post",
+		data : {"index" : index },
+		dataType : 'json',
+		success : function(data){
+			if (data == 1){
+				alert("메세지가 전송되었습니다!");
+				location.href="/seoul/mypage";
+			}else{
+				alert("메세지 전송에 오류가 있습니다.");
+			}
+		},
+		
+		error : function(){ alert("메세지 전송에 오류가 발생했습니다."); }
+	}) /* ajax */
+    
+});
+
+</script>
 
 <script>
 
@@ -511,7 +568,7 @@ $(".listCheckbox").change(function() {
 			}
 		},
 		
-		error : function(){ alert("북마크가 정상적으로 삭제되지 않았습니다."); }
+		error : function(){ alert("북마크 삭제에 오류가 발생했습니다."); }
 	}) /* ajax */
     
 });

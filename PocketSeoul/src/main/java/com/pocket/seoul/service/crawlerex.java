@@ -16,6 +16,7 @@ public class crawlerex {
  
 		public List<Mark> getyth() throws IOException{
 		
+			
 			List<Mark> list = new ArrayList<>();
 			
 			try {
@@ -26,7 +27,7 @@ public class crawlerex {
 				Elements url = doc.select(".tlt a");
 				Elements data = doc.select(".pc");
 				
-				ArrayList<String> dateArr = new ArrayList<String>();
+				List<String> dateArr = new ArrayList<String>();
 				
 				for(int i = 4 ; i < 13; i+=2 ) {
 					 Element datas = data.get(i);
@@ -42,10 +43,11 @@ public class crawlerex {
 		            String titleStr = title.text();
 		            String urlStr = urls.attr("abs:href");
 		            String dateStr = dateArr.get(i);
-		     
+		            		                
 		            Mark mark = new Mark(titleStr, urlStr, dateStr);
 
 		            list.add(mark);
+		    
 		        }
 				
 			} catch (IOException e) {
@@ -67,7 +69,7 @@ public class crawlerex {
 				Elements url = doc.select(".txtL a");
 				Elements data = doc.select(".num");
 				
-				ArrayList<String> dateArr = new ArrayList<String>();
+				List<String> dateArr = new ArrayList<String>();
 				
 				for(int i = 0 ; i < 9; i+=2 ) {
 					 Element datas = data.get(i);

@@ -50,8 +50,15 @@ public class IndexController {
 		List<Mark> list = new ArrayList<>();
 		int arr[];
 		int result = 1;
-		
+		long startTime = System.currentTimeMillis(); // 코드 시작 시간
 		list = listservice.makeList();
+
+		long endTime = System.currentTimeMillis(); // 코드 끝난 시간
+		 
+		long durationTimeSec = endTime - startTime;
+		System.out.println(durationTimeSec + "m/s"); // 밀리세컨드 출력
+		System.out.println((durationTimeSec / 1000) + "sec"); // 초 단위 변환 출력
+		
 		arr = listservice.makeIndex();
 	
 		HttpSession session = reqeust.getSession(false);

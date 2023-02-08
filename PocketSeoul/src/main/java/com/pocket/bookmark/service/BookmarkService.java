@@ -6,17 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.pocket.bookmark.entity.Bookmark;
 import com.pocket.bookmark.mapper.bookmarkMapper;
 import com.pocket.member.entity.Mark;
 
 @Component @Service
 public class BookmarkService {
 	
-	private bookmarkMapper bookmark;
+	private bookmarkMapper bookmarkmapper;
 	
 	@Autowired
-	public BookmarkService(bookmarkMapper bookmark) {
-		this.bookmark = bookmark;
+	public BookmarkService(bookmarkMapper bookmarkmapper) {
+		this.bookmarkmapper = bookmarkmapper;
 		
 	}
 	
@@ -26,10 +27,16 @@ public class BookmarkService {
 		String date = list.get(number).getDate();
 		String url = list.get(number).getUrl();
 		
-		int result = bookmark.insertList(title, date, url, userid);
+		int result = bookmarkmapper.insertList(title, date, url, userid);
 		
 		return result;
 	}
 	
+	public Bookmark sendBmark(int number, Long userid) {
+		
+		Bookmark bookmark1 = bookmarkmapper.sendBookmark(number, userid);
+	
+		return bookmark1;
+	}
 
 }

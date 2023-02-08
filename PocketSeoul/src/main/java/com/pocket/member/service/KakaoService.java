@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.pocket.bookmark.entity.Bookmark;
 
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
@@ -116,9 +117,76 @@ public class KakaoService {
               resultMap.put("email", email); 
 
           } catch (IOException e) {
-              // TODO Auto-generated catch block
               e.printStackTrace();
           }
           return resultMap;
       }
+     
+  // 나에게 메시지 보내기
+ 	public int isSendMessage(String access_Token, Bookmark bookmark) {
+ 		
+ 		int resultInt = 0; 
+ 		
+ 		String reqURL = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
+ 		try {
+ 			URL url = new URL(reqURL);
+
+ 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+ 			conn.setRequestMethod("POST");
+ 			conn.setDoOutput(true); // OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
+ 			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+ 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+ 			StringBuilder sb = new StringBuilder();
+
+ 			String title = bookmark.getLIST_TITLE();
+ 			String date = bookmark.getLIST_DATE();
+ 			
+
+ 			JsonObject json = new JsonObject();
+ 			json.addProperty("object_type", "text");
+ 			json.addProperty("text", title +  "\n공고일 : " + date);
+ 			json.addProperty("button_title", "내 북마크에서 확인"); 
+ 			JsonObject link = new JsonObject();
+ 			link.addProperty("web_url", "http://localhost:8060/seoul/mypage"); 
+ 			link.addProperty("mobile_web_url", "http://localhost:8060/seoul/mypage"); 
+
+ 			json.add("link", link.getAsJsonObject());
+
+ 			sb.append("template_object=" + json);
+
+ 			System.out.println(sb.toString());
+
+ 			bw.write(sb.toString());
+ 			bw.flush();
+
+ 			// 결과 코드가 200이라면 성공
+ 			int responseCode = conn.getResponseCode();
+ 			System.out.println("responseCode : " + responseCode);
+
+ 			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+ 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+ 			String line = "";
+ 			String result = "";
+
+ 			while ((line = br.readLine()) != null) {
+ 				result += line;
+ 			}
+ 			// response body : 0이면 성공
+ 			System.out.println("response body : " + result);
+
+ 			bw.close();
+ 			br.close();
+
+ 			if (responseCode == 200) {
+ 				 resultInt = 1;
+ 				return  resultInt;
+ 			}
+
+ 		} catch (IOException e) {
+ 			e.printStackTrace();
+ 		}
+
+ 		return  resultInt;
+ 	}
 }

@@ -54,9 +54,10 @@ public class MemberController {
 	            //추가됨: 카카오 토큰 요청
 	            KakaoToken kakaoToken = loginService.requestToken(code);
 	            	
-	         log.info("kakoToken = {}", kakaoToken);
+	            log.info("kakoToken = {}", kakaoToken);
 	         
 	         	//추가됨: 유저정보 요청
+	            String accesstoken = kakaoToken.getAccess_token();
 	            User user = loginService.requestUser(kakaoToken.getAccess_token());
 	            log.info("user = {}",user);
 	            
@@ -66,7 +67,7 @@ public class MemberController {
 	            Long id = user.getId();
 	            System.out.println(id);
 		        
-		        memservice.session(request, id);
+		        memservice.session(request, id, accesstoken);
 				
 		        return "redirect:/mypage"; 
 	
@@ -108,5 +109,7 @@ public class MemberController {
 	    	
 	        return "MyPage";
 	    }
+	    
+
 	    
 	}
